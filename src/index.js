@@ -1,4 +1,4 @@
-import 'phaser';
+import "phaser";
 import config from "./config";
 
-var game = new Phaser.Game(config);
+new Phaser.Game(config);

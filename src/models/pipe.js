@@ -1,45 +1,39 @@
-import 'phaser';
-import PipeTop from "./pipe-top";
-import PipeBottom from "./pipe-bottom";
+import "phaser";
+import {SCREEN_WIDTH} from "../constants";
 
-const Pipe = new Phaser.Class({
+const INITIAL_STATE = 338;
+
+export default new Phaser.Class({
   Extends: Phaser.GameObjects.Image,
-  initialize:
-
-    function Pipe (scene)
-  {
-    const diff = Phaser.Math.RND.between(-63, 63);
-    const pipeTopGroup = scene.add.group({
-      classType: PipeTop,
-      maxSize: 4,
-      runChildUpdate: true,
-    });
-    const pipeBottomGroup = scene.add.group({
-      classType: PipeBottom,
-      maxSize: 4,
-      runChildUpdate: true,
-    });
-
-    Phaser.GameObjects.Image.call(this, scene, 388, 0, '');
-    const top =  pipeTopGroup.create(1);
-    const bottom = pipeBottomGroup.create(1);
-
-    top.y -= diff;
-    bottom.y -= diff;
+  initialize: function Pipe (scene) {
+    Phaser.GameObjects.Image.call(this, scene, INITIAL_STATE, 0, "");
+    this.alpha=0; //hide parent
+    this.speed = Phaser.Math.GetSpeed(SCREEN_WIDTH, 1.5); //screen widht, 1s
+    this.addChildren(scene);
   },
 
-
-  update: function (time, delta) //???delta
-  {
-    this.setPosition(this.x - (this.speed * delta), this.y);
-
-    if (this.x < -50)
-      {
-        this.destroy();
-      }
+  addChildren(scene) {
+    const randPositionY = Phaser.Math.RND.between(-80, 80);
+    const top = scene.add.image(INITIAL_STATE, -42, "pipe");
+    const bottom = scene.add.image(INITIAL_STATE, 378, "pipe");
+    top.setAngle(180);
+    top.flipX = true;
+    // Add random number
+    top.y -= randPositionY;
+    bottom.y -= randPositionY;
+    //assign it to the parent image
+    this.pipeTop = top;
+    this.pipeBottom = bottom;
   },
 
+  update(time, delta) {
+    const distance = this.speed * delta;
+    this.pipeTop.x -= distance;
+    this.pipeBottom.x -= distance;
+    this.x -= distance;
+
+    if (this.x < -50) {
+      this.destroy();
+    }
+  },
 });
-
-
-export default Pipe;
