@@ -5,6 +5,7 @@ const INITIAL_STATE = 338;
 
 export default new Phaser.Class({
   Extends: Phaser.GameObjects.Image,
+  paused: false,
   initialize: function Pipe (scene) {
     Phaser.GameObjects.Image.call(this, scene, INITIAL_STATE, 0, "");
     this.alpha=0; //hide parent
@@ -14,19 +15,31 @@ export default new Phaser.Class({
 
   addChildren(scene) {
     const randPositionY = Phaser.Math.RND.between(-80, 80);
-    const top = scene.add.image(INITIAL_STATE, -42, "pipe");
-    const bottom = scene.add.image(INITIAL_STATE, 378, "pipe");
-    top.setAngle(180);
-    top.flipX = true;
-    // Add random number
-    top.y -= randPositionY;
-    bottom.y -= randPositionY;
-    //assign it to the parent image
-    this.pipeTop = top;
-    this.pipeBottom = bottom;
+    this.pipeTop  = this.buildPipe(scene,INITIAL_STATE, (-42 - randPositionY), 180, true);
+    this.pipeBottom = this.buildPipe(scene,INITIAL_STATE, (378 - randPositionY));
+  },
+
+  destroyChild(){
+    this.pipeTop.destroy();
+    this.pipeBottom.destroy();
+  },
+
+  buildPipe(scene, x, y, angle=0, flipX=false){
+    const pipe = scene.physics.add.image(x, y, "pipe");
+    pipe.setAngle(angle);
+    pipe.flipX = flipX;
+    pipe.body.allowGravity = false;
+    pipe.body.immovable = true;
+    scene.physics.add.collider(scene.bird, pipe, this.birdCrash, null, this);
+    return pipe;
+  },
+
+  birdCrash(){
+    this.scene.stopGame();
   },
 
   update(time, delta) {
+    if(this.paused) return;
     const distance = this.speed * delta;
     this.pipeTop.x -= distance;
     this.pipeBottom.x -= distance;
