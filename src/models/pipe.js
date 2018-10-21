@@ -48,5 +48,10 @@ export default new Phaser.Class({
     if (this.x < -50) {
       this.destroy();
     }
+
+    if (this.x < 202 && !this.passed) {
+      this.passed = true;
+      this.scene.addPoint();
+    }
   },
 });
