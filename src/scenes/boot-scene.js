@@ -105,7 +105,6 @@ export default class BootScene extends Phaser.Scene {
     this.gameOver = false;
     this.children.list.forEach((child) => {
       if(child instanceof Pipe){
-        child.destroyChild();
         child.destroy(true, true);
       }
     });

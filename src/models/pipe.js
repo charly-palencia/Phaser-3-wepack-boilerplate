@@ -3,46 +3,39 @@ import {SCREEN_WIDTH} from "../constants";
 
 const INITIAL_STATE = 338;
 
-export default new Phaser.Class({
-  Extends: Phaser.GameObjects.Image,
-  paused: false,
-  initialize: function Pipe (scene) {
-    Phaser.GameObjects.Image.call(this, scene, INITIAL_STATE, 0, "");
-    this.alpha=0; //hide parent
+export default class Pipe extends Phaser.GameObjects.Container{
+  constructor(scene){
+    super(scene, INITIAL_STATE, 0);
     this.speed = Phaser.Math.GetSpeed(SCREEN_WIDTH, 1.5); //screen widht, 1s
-    this.addChildren(scene);
-  },
-
-  addChildren(scene) {
     const randPositionY = Phaser.Math.RND.between(-80, 80);
-    this.pipeTop  = this.buildPipe(scene,INITIAL_STATE, (-42 - randPositionY), 180, true);
-    this.pipeBottom = this.buildPipe(scene,INITIAL_STATE, (378 - randPositionY));
-  },
+    this.y -= randPositionY;
+    this.addChildren();
+  }
 
-  destroyChild(){
-    this.pipeTop.destroy();
-    this.pipeBottom.destroy();
-  },
+  addChildren() {
+    //explain this calc
+    this.buildPipe(0, -47, 180, true);
+    this.buildPipe(0, 372);
+  }
 
-  buildPipe(scene, x, y, angle=0, flipX=false){
-    const pipe = scene.physics.add.image(x, y, "pipe");
+  buildPipe(x, y, angle=0, flipX=false){
+    const pipe = this.scene.physics.add.image(x, y, "pipe");
     pipe.setAngle(angle);
     pipe.flipX = flipX;
     pipe.body.allowGravity = false;
     pipe.body.immovable = true;
-    scene.physics.add.collider(scene.bird, pipe, this.birdCrash, null, this);
+    this.scene.physics.add.collider(this.scene.bird, pipe, this.birdCrash, null, this);
+    this.add(pipe);
     return pipe;
-  },
+  }
 
   birdCrash(){
     this.scene.stopGame();
-  },
+  }
 
   update(time, delta) {
     if(this.paused) return;
     const distance = this.speed * delta;
-    this.pipeTop.x -= distance;
-    this.pipeBottom.x -= distance;
     this.x -= distance;
 
     if (this.x < -50) {
@@ -53,5 +46,5 @@ export default new Phaser.Class({
       this.passed = true;
       this.scene.addPoint();
     }
-  },
-});
+  }
+}
