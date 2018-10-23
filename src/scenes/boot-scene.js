@@ -7,7 +7,7 @@ export default class BootScene extends Phaser.Scene {
     super({key: "Boot"});
     this.gameOver = false;
     this.score = [];
-    this.points = 10;
+    this.points = 0;
   }
 
   preload() {
@@ -103,6 +103,8 @@ export default class BootScene extends Phaser.Scene {
     this.pipeGenerator.paused = false;
     this.bird.body.reset(186, 256);
     this.gameOver = false;
+    this.points = 0;
+    this.updateScore();
     this.children.list.forEach((child) => {
       if(child instanceof Pipe){
         child.destroy(true, true);
