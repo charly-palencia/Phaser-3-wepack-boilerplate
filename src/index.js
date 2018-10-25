@@ -2,6 +2,7 @@ import "phaser";
 // import config from "./config";
 import * as constants from "./constants";
 import BootScene from "./scenes/boot-scene";
+import HomScene from "./scenes/home-scene";
 
 class AppGame extends Phaser.Game {
   constructor(config){
@@ -22,5 +23,5 @@ new AppGame({
       gravity: { y: 300 }
     }
   },
-  scene: [BootScene]
+  scene: [HomScene, BootScene]
 });
