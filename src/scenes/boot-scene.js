@@ -11,7 +11,7 @@ export default class BootScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("yellow-bird", "assets/yellowbird-upflap.png");
+    this.load.atlas("yellowbird", "assets/yellowbird.png", "assets/yellowbird.json");
     this.load.image("base", "assets/base.png");
     this.load.image("pipe", "assets/pipe-green.png");
     this.load.image("game-over", "assets/gameover.png");
@@ -19,6 +19,11 @@ export default class BootScene extends Phaser.Scene {
     NumberArrayStep(0,10).forEach(number => {
       this.load.image(number.toString(), `assets/${number}.png`);
     });
+
+    this.load.audio("wing", "assets/audio/wing.wav");
+    this.load.audio("hit", "assets/audio/hit.wav");
+    this.load.audio("die", "assets/audio/die.wav");
+    this.load.audio("point", "assets/audio/point.wav");
   }
 
   update(){
@@ -33,6 +38,9 @@ export default class BootScene extends Phaser.Scene {
     this.addBackground();
     this.addBird();
     const floor = this.addFloor();
+    this.hitSound = this.sound.add("hit");
+    this.dieSound = this.sound.add("die");
+    this.pointSound = this.sound.add("point");
     this.addPipeGenerator();
 
     //include events
@@ -68,12 +76,23 @@ export default class BootScene extends Phaser.Scene {
   }
 
   addBird(){
-    this.bird = this.physics.add.image(168, 256, "yellow-bird");
+    this.bird = this.physics.add.sprite(168, 256, "yellowbird", "yellowbird-0.png");
+    const flyFrames = this.anims.generateFrameNames("yellowbird", {
+      start: 0,
+      end: 2,
+      prefix: "yellowbird-",
+      suffix: ".png",
+    });
+
+    this.anims.create({ key: "fly", frames: flyFrames, frameRate: 5, repeat: -1 });
+    this.bird.anims.play("fly");
     this.bird.body.allowRotation = true;
+    // const wing = this.sound.add("wing");
 
     this.birdEvent = this.input.keyboard.on("keydown_SPACE", () => {
       if(this.gameOver) return;
       this.bird.body.velocity.y = -150;
+      // wing.play();
     });
   }
 
@@ -114,6 +133,7 @@ export default class BootScene extends Phaser.Scene {
 
   stopGame(){
     if(this.gameOver) return;
+    this.dieSound.play();
     this.gameOver = true;
     this.gameOverImage = this.add.image(168, 256, "game-over");
     this.pipeGenerator.paused = true;

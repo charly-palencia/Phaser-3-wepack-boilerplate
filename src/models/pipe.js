@@ -30,6 +30,7 @@ export default class Pipe extends Phaser.GameObjects.Container{
   }
 
   birdCrash(){
+    this.scene.hitSound.play();
     this.scene.stopGame();
   }
 
@@ -45,6 +46,7 @@ export default class Pipe extends Phaser.GameObjects.Container{
     if (this.x < 202 && !this.passed) {
       this.passed = true;
       this.scene.addPoint();
+      this.scene.pointSound.play();
     }
   }
 }
