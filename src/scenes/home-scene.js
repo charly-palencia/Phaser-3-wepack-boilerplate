@@ -18,7 +18,7 @@ export default class HomScene extends Phaser.Scene {
     this.addFloor();
     this.addMessage();
     this.addBackground();
-    this.birdEvent = this.input.keyboard.on("keydown_SPACE", () => {
+    this.birdEvent = this.input.on("pointerdown", () => {
       this.game.scene.stop("Home");
       this.game.scene.start("Boot");
     });

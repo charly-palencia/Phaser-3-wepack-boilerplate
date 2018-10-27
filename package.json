@@ -1,11 +1,11 @@
 {
   "name": "phaser3-project-template",
-  "version": "1.0.9",
-  "description": "A Phaser 3 Project Template",
+  "version": "0.0.1",
+  "description": "Template Phaser 3",
   "main": "src/index.js",
   "scripts": {
-    "build": "webpack",
-    "start": "npm run build && webpack-dev-server --port=8000",
+    "build": "webpack --config config/webpack.prod.js",
+    "start": "./node_modules/.bin/webpack-dev-server --port=8000 --config config/webpack.dev.js",
     "lint": "./node_modules/.bin/eslint --fix src/*/*.js",
     "lint:watch": "./node_modules/.bin/esw src/*/*.js -w"
   },
@@ -13,21 +13,71 @@
     "type": "git",
     "url": "git+https://github.com/photonstorm/phaser3-project-template.git"
   },
-  "author": "Richard Davey <rdavey@gmail.com> (http://www.photonstorm.com)",
+  "author": "Charly Palencia <charly.palencia@gmail.com> (http://www.chalien.co)",
   "license": "MIT",
   "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
-  "bugs": {
-    "url": "https://github.com/photonstorm/phaser3-project-template/issues"
-  },
   "homepage": "https://github.com/photonstorm/phaser3-project-template#readme",
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.4",
     "eslint": "^5.7.0",
+    "html-webpack-harddisk-plugin": "^1.0.1",
+    "html-webpack-plugin": "^3.2.0",
     "jslint": "^0.12.0",
     "raw-loader": "^0.5.1",
-    "webpack": "^3.4.1",
-    "webpack-dev-server": "^2.11.0"
+    "webpack": "^4.23.0",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-merge": "^4.1.4"
   },
   "dependencies": {
     "phaser": "^3.15.1"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es6": true,
+      "commonjs": true
+    },
+    "extends": "eslint:recommended",
+    "globals": {
+      "WEBGL_RENDERER": true,
+      "CANVAS_RENDERER": true,
+      "Phaser": true,
+      "process": true,
+      "ActiveXObject": true,
+      "FBInstant": true,
+      "__dirname": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2015,
+      "sourceType": "module"
+    },
+    "rules": {
+      "indent": [
+        "error",
+        2
+      ],
+      "linebreak-style": [
+        "error",
+        "unix"
+      ],
+      "quotes": [
+        "error",
+        "double"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ]
+    }
   }
 }

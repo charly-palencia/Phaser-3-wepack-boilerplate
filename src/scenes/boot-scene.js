@@ -45,7 +45,7 @@ export default class BootScene extends Phaser.Scene {
 
     //include events
     this.physics.add.overlap(this.bird, floor, this.stopGame, null, this);
-    this.input.keyboard.on("keydown_ENTER", this.start.bind(this));
+    this.input.on("pointerdown", this.start.bind(this));
     this.updateScore();
   }
 
@@ -55,7 +55,6 @@ export default class BootScene extends Phaser.Scene {
   }
 
   //no public methods
-
   addPipeGenerator(){
     this.pipe = this.add.group({
       classType: Pipe,
@@ -89,7 +88,7 @@ export default class BootScene extends Phaser.Scene {
     this.bird.body.allowRotation = true;
     // const wing = this.sound.add("wing");
 
-    this.birdEvent = this.input.keyboard.on("keydown_SPACE", () => {
+    this.birdEvent = this.input.on("pointerdown", () => {
       if(this.gameOver) return;
       this.bird.body.velocity.y = -150;
       // wing.play();
