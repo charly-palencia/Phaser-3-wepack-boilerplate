@@ -4,7 +4,7 @@ import * as constants from "./constants";
 import BootScene from "./scenes/boot-scene";
 import HomScene from "./scenes/home-scene";
 
-class AppGame extends Phaser.Game {
+export class AppGame extends Phaser.Game {
   constructor(config){
     super(config);
   }
@@ -41,7 +41,7 @@ window.onload = function() {
     physics: {
       default: "arcade",
       arcade: {
-        debug: true,
+        // debug: true,
         gravity: { y: 300 }
       }
     },

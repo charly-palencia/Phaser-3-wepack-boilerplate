@@ -20,12 +20,16 @@
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
+    "babel-plugin-module-resolver": "^3.1.1",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.4",
     "eslint": "^5.7.0",
     "html-webpack-harddisk-plugin": "^1.0.1",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.6.0",
     "jslint": "^0.12.0",
     "raw-loader": "^0.5.1",
     "webpack": "^4.23.0",
@@ -39,6 +43,14 @@
   "babel": {
     "presets": [
       "@babel/preset-env"
+    ],
+    "plugins": [
+      ["module-resolver", {
+        "root": ["./"],
+        "alias": {
+          "test": "./tests"
+        }
+      }]
     ]
   },
   "eslintConfig": {
@@ -55,7 +67,9 @@
       "process": true,
       "ActiveXObject": true,
       "FBInstant": true,
-      "__dirname": true
+      "__dirname": true,
+      "describe": true,
+      "it": true
     },
     "parserOptions": {
       "ecmaVersion": 2015,
