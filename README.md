@@ -1,13 +1,27 @@
-# Phaser 3 Webpack Project Template
+# Phaser 3 Boilerplate
+A simple Phaser Boilerplate charged using Webpack and Babel
 
-Webpack + Babel 
+Why should i use it?
 
-### Requirements
+* **Speed up** development process
+* **Rapid feedback** Live reload after every save action
+* **Keep it clean** Using JSlLint code quality tool
+* **Automated production build** create a new distribution version ready to prod!
 
-We need [Node.js](https://nodejs.org) to install and run scripts.
+## Get Started
+1. First with need to setup our machine [here](#initial-machine-setup)
+2. Clone project
+`git clone https://github.com/charly-palencia/Phaser-3-wepack-boilerplate`
+3. Install dependencies
+`npm install`
+4. Run server
+`npm run start`
+
+## Setup machine
+1. Install [Node LTS/Carbon](https://nodejs.org/es/) version
+2. Install [Git](https://git-scm.com/)
 
 ## Install and run
-
 Run next commands in your terminal:
 
 | Command | Description |
@@ -17,4 +31,3 @@ Run next commands in your terminal:
 | `npm lint` | Validate and fix js Syntax. |
 | `npm lint:watch` | Launch watch server to validate js syntax |
 | `npm run build` | Generate Dist version |
-=======
