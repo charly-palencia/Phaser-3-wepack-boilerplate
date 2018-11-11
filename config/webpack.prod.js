@@ -8,7 +8,6 @@ const path = require("path");
 
 module.exports = merge(common, {
   mode: "production",
-  entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "../dist"),
     publicPath: "/",
