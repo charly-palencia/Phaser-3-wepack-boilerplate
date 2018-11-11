@@ -1,6 +1,8 @@
 # Phaser 3 Boilerplate
 A simple Phaser Boilerplate charged using Webpack and Babel
 
+![](docs/game.gif)
+
 Why should i use it?
 
 * **Speed up** development process
@@ -34,6 +36,6 @@ Run next commands in your terminal:
 
 ## TODO
 
-[ ] Create clean example command
-[ ] Create matter branch example
-[ ] Create impact branch example
+- [ ] Create clean example command
+- [ ] Create matter branch example
+- [ ] Create impact branch example
