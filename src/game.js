@@ -8,7 +8,7 @@ export class AppGame extends Phaser.Game {
   }
 }
 
-const config =  {
+const config = {
   backgroundColor: "#7ec0ee",
   type: Phaser.AUTO,
   parent: "phaser-boilerplate",
@@ -24,12 +24,14 @@ const config =  {
   scene: [BootScene]
 };
 
-FBInstant.initializeAsync().then(function() {
-  FBInstant.setLoadingProgress(100);
-  FBInstant.startGameAsync().then(function() {
-    new AppGame(config);
+if(typeof FBInstant !== "undefined"){
+  FBInstant.initializeAsync().then(function() {
+    FBInstant.setLoadingProgress(100);
+    FBInstant.startGameAsync().then(function() {
+      new AppGame(config);
+    });
   });
-});
+}
 
 window.onload = function() {
   new AppGame(config);
