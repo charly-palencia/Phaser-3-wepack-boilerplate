@@ -18,6 +18,9 @@ Why should i use it?
 `npm install`
 4. Run server
 `npm run start`
+5. Go to `localhost:8000`
+
+
 
 ## Setup machine
 1. Install [Node LTS/Carbon](https://nodejs.org/es/) version
@@ -30,8 +33,8 @@ Run next commands in your terminal:
 |---------|-------------|
 | `npm install` | Install dependencies and launch browser with examples.|
 | `npm start` | Launch browser to show the examples. <br> Press `Ctrl + c` to kill **http-server** process. |
-| `npm lint` | Validate and fix js Syntax. |
-| `npm lint:watch` | Launch watch server to validate js syntax |
+| `npm run lint` | Validate and fix js Syntax. |
+| `npm run lint:watch` | Launch watch server to validate js syntax |
 | `npm run build` | Generate Dist version |
 | `npm run test` | Run test suite|
 

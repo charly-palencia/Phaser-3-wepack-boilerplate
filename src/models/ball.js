@@ -19,7 +19,7 @@ export default class Ball extends Phaser.GameObjects.Sprite {
   addPhysicConfig(){
     const {body} = this;
     body.setCollideWorldBounds(true);
-    body.setBounce(0.2);
+    body.setBounce(0.1);
     body.maxVelocity.x = VELOCITY;
     body.maxVelocity.y = 500;
     body.drag.x = 150;
@@ -74,7 +74,7 @@ export default class Ball extends Phaser.GameObjects.Sprite {
       this.body.setCollideWorldBounds(false);
     }
 
-    if(this.y > 512){
+    if(this.y > 600){
       this.isDead = true;
     }
   }

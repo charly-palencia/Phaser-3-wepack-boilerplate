@@ -13,12 +13,83 @@
          "width":39,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":7,
+         "name":"groupDiamond",
+         "objects":[
+                {
+                 "gid":82,
+                 "height":28,
+                 "id":5,
+                 "name":"diamond",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2256,
+                 "y":276
+                }, 
+                {
+                 "gid":82,
+                 "height":28,
+                 "id":6,
+                 "name":"diamond",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1846,
+                 "y":278
+                }, 
+                {
+                 "gid":82,
+                 "height":28,
+                 "id":7,
+                 "name":"diamond",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1556,
+                 "y":200
+                }, 
+                {
+                 "gid":82,
+                 "height":28,
+                 "id":8,
+                 "name":"diamond",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":718,
+                 "y":130
+                }, 
+                {
+                 "gid":82,
+                 "height":28,
+                 "id":9,
+                 "name":"diamond",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1004,
+                 "y":272
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":5,
- "nextobjectid":5,
+ "nextlayerid":8,
+ "nextobjectid":10,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.2.0",
+ "tiledversion":"1.2.1",
  "tileheight":70,
  "tilesets":[
         {
@@ -773,6 +844,19 @@
                         }]
                 }],
          "tilewidth":70
+        }, 
+        {
+         "columns":1,
+         "firstgid":82,
+         "image":"..\/imgs\/diamond.png",
+         "imageheight":28,
+         "imagewidth":32,
+         "margin":0,
+         "name":"diamond",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":28,
+         "tilewidth":32
         }],
  "tilewidth":70,
  "type":"map",
