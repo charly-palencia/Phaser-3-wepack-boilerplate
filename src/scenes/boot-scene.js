@@ -28,13 +28,9 @@ export default class BootScene extends Phaser.Scene {
     this.groundLayer = this.addGround();
     this.redBall = new Ball(this, 200, 200);
     this.diamonds = this.addAllDiamonds();
+    this.showScore = this.addScore();
     this.gameOverSound = this.sound.add("gameOverSound");
     this.keyR = this.input.keyboard.addKey("R");
-    this.score = 0;
-    this.scoreImage = this.add.image(270,25, "diamond");
-    this.scoreImage.setScrollFactor(0);
-    this.scoreText = this.add.text(290, 20, "x " + this.score);
-    this.scoreText.setScrollFactor(0);
 
     this.cameras.main.setBounds(0, 0, this.groundLayer.width, this.groundLayer.height);
     this.cameras.main.startFollow(this.redBall, true);
@@ -46,14 +42,11 @@ export default class BootScene extends Phaser.Scene {
     this.redBall.update(time, delta);
 
     if(this.redBall.isDead && !this.isGameOver){
-      this.addGameOverMessage();
-      this.addGameOverSound();
-      this.addGameOver();
-      this.isGameOver = true;
+      this.runGameOver();
     }
 
     if(this.redBall.isDead){
-      this.rToReset();
+      this.resetTheGame();
     }
   }
 
@@ -66,6 +59,14 @@ export default class BootScene extends Phaser.Scene {
     this.physics.world.bounds.height = 512;
     groundLayer.setCollisionByProperty({ collides: true });
     return groundLayer;
+  }
+
+  addScore(){
+    this.score = 0;
+    this.scoreImage = this.add.image(270,25, "diamond");
+    this.scoreImage.setScrollFactor(0);
+    this.scoreText = this.add.text(290, 20, "x " + this.score);
+    this.scoreText.setScrollFactor(0);
   }
 
   addAllDiamonds(){
@@ -85,24 +86,16 @@ export default class BootScene extends Phaser.Scene {
     diamond.destroy();
   }
 
-  addGameOver(){
+  runGameOver(){
     this.physics.world.pause();
-    this.isGameStarted = false;
-  }
-
-  addGameOverSound(){
-    if(this.redBall.isDead){
-      this.gameOverSound.play();
-    }
-  }
-
-  addGameOverMessage(){
     this.gameOverText = this.add.image(this.redBall.x, this.height/2,"gameOverImage");
     this.resetText = this.add.text(this.redBall.x - 120, this.height - 200,
       "Presiona R para Reiniciar");
+    this.gameOverSound.play();
+    this.isGameOver = true;
   }
 
-  rToReset(){
+  resetTheGame(){
     if(Phaser.Input.Keyboard.JustDown(this.keyR)){
       this.isGameOver = false;
       this.redBall.reset();
